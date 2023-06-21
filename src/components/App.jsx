@@ -7,16 +7,16 @@ import { Filter } from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContactsList } from 'redux/contactClice';
 import { addContact} from 'redux/contactClice';
+import { getFilter, setFilter } from 'redux/filterClice';
 
 function App() {
   const dispatch = useDispatch();
   const contactsList = useSelector(getContactsList);
-  console.log(contactsList)
-  
-  const [filter, setFilter] = useState('');
 
+  const [filter, setFilter] = useState('');
+  
   const changeFilter = e => {
-    setFilter(e.target.value);
+   setFilter(e.target.value)
   };
 
   
