@@ -4,10 +4,10 @@ const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     list: [
-      { id: 'id-1', name: 'Rosie', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie', number: '227-91-26' },
+      { id: 'id-1', name: 'Rosie', number: '4591256' },
+      { id: 'id-2', name: 'Hermione', number: '4438912' },
+      { id: 'id-3', name: 'Eden', number: '6451779' },
+      { id: 'id-4', name: 'Annie', number: '2279126' },
     ],
   },
   reducers: {
