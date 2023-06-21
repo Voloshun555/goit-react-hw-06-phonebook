@@ -1,25 +1,22 @@
-import { useState } from 'react';
-import css from './App.module.css';
-import ContactForm from './contactForm/contactForm';
 import { nanoid } from 'nanoid';
 import { ContactList } from './contactList/contactList';
 import { Filter } from './Filter/Filter';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContactsList } from 'redux/contactClice';
-import { addContact} from 'redux/contactClice';
-import { getFilter, setFilter } from 'redux/filterClice';
+import { addContact } from 'redux/contactClice';
+import { setFilter } from 'redux/filterClice';
+import { getFilter, getContactsList } from 'redux/selectors';
+import ContactForm from './contactForm/contactForm';
+import css from './App.module.css';
 
 function App() {
   const dispatch = useDispatch();
   const contactsList = useSelector(getContactsList);
 
-  const [filter, setFilter] = useState('');
-  
-  const changeFilter = e => {
-   setFilter(e.target.value)
-  };
+  const filter = useSelector(getFilter);
 
-  
+  const changeFilter = e => {
+    dispatch(setFilter(e.target.value));
+  };
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -42,7 +39,7 @@ function App() {
       alert(`${data.name} або ${data.number} вже є в телефонній книзі`);
       return;
     } else {
-      dispatch(addContact(data))
+      dispatch(addContact(data));
     }
   };
 
@@ -50,12 +47,10 @@ function App() {
     <div className={css.appDiv}>
       <ContactForm onSubmit={addContacts} />
       <h3>Телефонна книга: {contactsList.length}</h3>
-       <Filter value={filter} onChange={changeFilter} />
+      <Filter value={filter} onChange={changeFilter} />
 
       {contactsList.length ? (
-        <ContactList
-          contacts={getVisibleContacts()}
-        />
+        <ContactList contacts={getVisibleContacts()} />
       ) : (
         <p>На жаль у тебе не має контактів</p>
       )}
@@ -64,4 +59,3 @@ function App() {
 }
 
 export default App;
-
