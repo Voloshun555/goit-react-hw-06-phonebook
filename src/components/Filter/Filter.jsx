@@ -1,7 +1,12 @@
 import css from './Filter.module.css';
-import PropTypes from 'prop-types';
+import { selectFilter } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from 'redux/filterSlice';
 
-export const Filter = ({ value, onChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+
   return (
     <div>
       <label className={css.fiterForm}>
@@ -9,15 +14,10 @@ export const Filter = ({ value, onChange }) => {
         <input
           className={css.inputTitle}
           type="name"
-          value={value}
-          onChange={onChange}
+          value={filter}
+          onChange={e => dispatch(setFilter(e.target.value))}
         />
       </label>
     </div>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
